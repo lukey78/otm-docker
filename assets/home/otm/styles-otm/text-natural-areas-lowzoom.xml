@@ -1,0 +1,68 @@
+<Style name="text-natural-areas-lowzoom">
+	<Rule>
+		&maxscale_zoom5;
+		&minscale_zoom6;
+		<Filter>[way_area] &gt; 1e11</Filter>
+		<TextSymbolizer size="9" character-spacing="40" spacing="500" fontset-name="sans-oblique" fill="black" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5"/>
+		<Placement character-spacing="2" halo-radius="1.7"/>		
+                </TextSymbolizer>                
+	</Rule>
+	<Rule>
+		&maxscale_zoom7;
+		&minscale_zoom7;
+		<Filter> [way_area] &lt; 1e11 and [way_area] &gt; 4e9 and [nextregionsize] &gt; 1e11</Filter>
+		<TextSymbolizer size="9" character-spacing="40" spacing="500" fontset-name="sans-oblique" fill="black" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5"/>
+		<Placement character-spacing="2" halo-radius="1.7"/>
+		</TextSymbolizer>
+	</Rule>
+	<Rule>
+		&maxscale_zoom8;
+		&minscale_zoom8;
+		<Filter>[way_area] &lt; 1e11  and ([way_area] &gt; 2e9 and [nextregionsize] &gt; 1e11)</Filter>
+		<TextSymbolizer size="9" character-spacing="40" spacing="500" fontset-name="sans-oblique" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5" halo-radius="1.7"/>
+		<Placement character-spacing="2" halo-radius="1.5"/>
+		</TextSymbolizer>
+	</Rule>
+	<Rule>
+		&maxscale_zoom9;
+		&minscale_zoom9;
+		<Filter>[way_area] &lt; 1e11  and ([way_area] &gt; 5e8  and [nextregionsize] &gt; 1e11)</Filter>
+		<TextSymbolizer size="10" character-spacing="40" spacing="500" fontset-name="sans-oblique" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5" halo-radius="1.7"/>
+		<Placement character-spacing="2" halo-radius="1.5"/>
+		</TextSymbolizer>
+	</Rule>
+	<Rule>
+		&maxscale_zoom10;
+		&minscale_zoom10;
+		<Filter>[way_area] &lt; 2.6e10  and ([way_area] &gt; 3e8  and [nextregionsize] &gt; 2.6e10)</Filter>
+		<TextSymbolizer size="10" character-spacing="40" spacing="500" fontset-name="sans-oblique" fill="black" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5" halo-radius="1.7"/>
+		<Placement character-spacing="2" halo-radius="1.5"/>
+		</TextSymbolizer>
+	</Rule>
+	<Rule>
+		&maxscale_zoom11;
+		&minscale_zoom11;
+		<Filter>[way_area] &lt; 6.4e9  and ([way_area] &gt; 1e8  and [nextregionsize] &gt; 6.4e9)</Filter>
+		<TextSymbolizer size="11" character-spacing="40" spacing="500" fontset-name="sans-oblique" fill="black" halo-radius="2" halo-fill="rgba(255,255,255,0.8)" placement="line" allow-overlap="true" placement-type="list">[name]
+		<Placement character-spacing="20"/>
+		<Placement character-spacing="10"/>
+		<Placement character-spacing="5" halo-radius="1.7"/>
+		<Placement character-spacing="2" halo-radius="1.5"/>
+		</TextSymbolizer>
+	</Rule>
+</Style>

@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO:
+	- waterfall
+	- label positions places
+	- railway bridges for others than simple rails
+	- generalize rivers
+-->
+<!DOCTYPE Map
+[
+	<!ENTITY basemap-relief SYSTEM "styles-otm/basemap-relief.xml">
+	<!ENTITY landuse-lowzoom SYSTEM "styles-otm/landuse-lowzoom.xml">
+	<!ENTITY landuse SYSTEM "styles-otm/landuse.xml">
+	<!ENTITY landuse-over-hillshade SYSTEM "styles-otm/landuse-over-hillshade.xml">
+	<!ENTITY hillshade SYSTEM "styles-otm/hillshade.xml">
+	<!ENTITY basemap-sea SYSTEM "styles-otm/basemap-sea.xml">
+	<!ENTITY water-casing-lowzoom SYSTEM "styles-otm/water-casing-lowzoom.xml">
+	<!ENTITY water-fill-lowzoom SYSTEM "styles-otm/water-fill-lowzoom.xml">
+	<!ENTITY waterway-lines-lowzoom SYSTEM "styles-otm/waterway-lines-lowzoom.xml">
+	<!ENTITY waterway-lines SYSTEM "styles-otm/waterway-lines.xml">
+	<!ENTITY waterway-polygons-casing SYSTEM "styles-otm/waterway-polygons-casing.xml">
+	<!ENTITY waterway-polygons-fill SYSTEM "styles-otm/waterway-polygons-fill.xml">
+	<!ENTITY water-areas SYSTEM "styles-otm/water-areas.xml">
+	<!ENTITY landuse-over-water SYSTEM "styles-otm/landuse-over-water.xml">
+	<!ENTITY road-areas SYSTEM "styles-otm/road-areas.xml">
+	<!ENTITY water-weir SYSTEM "styles-otm/water-weir.xml">
+	<!ENTITY waterway-arrows SYSTEM "styles-otm/waterway-arrows.xml">
+	<!ENTITY tunnels-casing SYSTEM "styles-otm/tunnels-casing.xml">
+	<!ENTITY tunnels-fill SYSTEM "styles-otm/tunnels-fill.xml">
+	<!ENTITY tunnels-middle SYSTEM "styles-otm/tunnels-middle.xml">
+	<!ENTITY cliffs SYSTEM "styles-otm/cliffs.xml">
+	<!ENTITY buildings SYSTEM "styles-otm/buildings.xml">
+	<!ENTITY areas SYSTEM "styles-otm/areas.xml">
+	<!ENTITY contours SYSTEM "styles-otm/contours.xml">
+	<!ENTITY borders-lowzoom SYSTEM "styles-otm/borders-lowzoom.xml">
+	<!ENTITY borders SYSTEM "styles-otm/borders.xml">
+	<!ENTITY barriers SYSTEM "styles-otm/barriers.xml">
+	<!ENTITY railways-lowzoom SYSTEM "styles-otm/railways-lowzoom.xml">
+	<!ENTITY railways-embankment SYSTEM "styles-otm/railways-embankment.xml">
+	<!ENTITY railways SYSTEM "styles-otm/railways.xml">
+	<!ENTITY airports-casing SYSTEM "styles-otm/airports-casing.xml">
+	<!ENTITY airports-fill SYSTEM "styles-otm/airports-fill.xml">
+	<!ENTITY airports-poly SYSTEM "styles-otm/airports-poly.xml">
+	<!ENTITY roads-casing-lowzoom SYSTEM "styles-otm/roads-casing-lowzoom.xml">
+	<!ENTITY roads-fill-lowzoom SYSTEM "styles-otm/roads-fill-lowzoom.xml">
+	<!ENTITY roads-casing SYSTEM "styles-otm/roads-casing.xml">
+	<!ENTITY roads-fill SYSTEM "styles-otm/roads-fill.xml">
+	<!ENTITY trams SYSTEM "styles-otm/trams.xml">
+	<!ENTITY housenumbers-poly SYSTEM "styles-otm/housenumbers-poly.xml">
+	<!ENTITY housenumbers-point SYSTEM "styles-otm/housenumbers-point.xml">
+	<!ENTITY road-names-text SYSTEM "styles-otm/road-names-text.xml">
+	<!ENTITY railway-points SYSTEM "styles-otm/railway-points.xml">
+	<!ENTITY symbols-road SYSTEM "styles-otm/symbols-road.xml">
+	<!ENTITY ferry-routes SYSTEM "styles-otm/ferry-routes.xml">
+	<!ENTITY railway-bridges-casing SYSTEM "styles-otm/railway-bridges-casing.xml">
+	<!ENTITY railway-bridges SYSTEM "styles-otm/railway-bridges.xml">
+	<!ENTITY bridges-casing SYSTEM "styles-otm/bridges-casing.xml">
+	<!ENTITY bridges-fill SYSTEM "styles-otm/bridges-fill.xml">
+	<!ENTITY bridges-middle SYSTEM "styles-otm/bridges-middle.xml">
+	<!ENTITY aerialways SYSTEM "styles-otm/aerialways.xml">
+	<!ENTITY powerlines SYSTEM "styles-otm/powerlines.xml">
+	<!ENTITY powertowers SYSTEM "styles-otm/powertowers.xml">
+	<!ENTITY text-cities-lowzoom SYSTEM "styles-otm/text-cities-lowzoom.xml">
+	<!ENTITY text-cities SYSTEM "styles-otm/text-cities.xml">
+	<!ENTITY text-towns SYSTEM "styles-otm/text-towns.xml">
+	<!ENTITY text-villages SYSTEM "styles-otm/text-villages.xml">
+    <!ENTITY symbols-sport SYSTEM "styles-otm/symbols-sport.xml">
+	<!ENTITY symbols-stations SYSTEM "styles-otm/symbols-stations.xml">
+	<!ENTITY text-natural-areas-lowzoom SYSTEM "styles-otm/text-natural-areas-lowzoom.xml">
+	<!ENTITY text-natural-areas-highzoom SYSTEM "styles-otm/text-natural-areas-highzoom.xml">
+    <!ENTITY text-water-lowzoom SYSTEM "styles-otm/text-water-lowzoom.xml">
+	<!ENTITY text-glacier-lowzoom SYSTEM "styles-otm/text-glacier-lowzoom.xml">
+	<!ENTITY text-natural-poly SYSTEM "styles-otm/text-natural-poly.xml">
+    <!ENTITY symbols-peaks SYSTEM "styles-otm/symbols-peaks.xml">
+    <!ENTITY text-peaks SYSTEM "styles-otm/text-peaks.xml">
+	<!ENTITY symbols-1 SYSTEM "styles-otm/symbols-1.xml">
+	<!ENTITY symbols-2 SYSTEM "styles-otm/symbols-2.xml">
+	<!ENTITY symbols-poly SYSTEM "styles-otm/symbols-poly.xml">
+	<!ENTITY symbols-point SYSTEM "styles-otm/symbols-point.xml">
+	<!ENTITY symbols-viewpoint SYSTEM "styles-otm/symbols-viewpoint.xml">
+	<!ENTITY symbols-saddle SYSTEM "styles-otm/symbols-saddle.xml">
+	<!ENTITY text-roads-ref SYSTEM "styles-otm/text-roads-ref.xml">
+	<!ENTITY text-waterways SYSTEM "styles-otm/text-waterways.xml">
+	<!ENTITY test SYSTEM "styles-otm/test.xml">
+	
+	<!ENTITY % entities SYSTEM "inc/entities.xml.inc">
+	%entities;
+]>
+
+<!-- background-color:
+	zoom 0...8: #117803
+	zoom 9+: e0e0e0
+-->
+<Map background-color="#e0e0e0" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over" buffer-size="256">
+	<!-- style definitions -->
+	&fontset-settings;
+
+	&landuse-lowzoom;
+	&landuse;
+	&landuse-over-hillshade;
+	&water-casing-lowzoom;
+	&water-fill-lowzoom;
+	&waterway-lines-lowzoom;
+	&waterway-lines;
+	&waterway-polygons-casing;
+	&waterway-polygons-fill;
+	&water-areas;
+	&landuse-over-water;
+	&road-areas;
+	&water-weir;
+	&waterway-arrows;
+	&tunnels-casing;
+	&tunnels-fill;
+	&tunnels-middle;
+	&cliffs;
+	&buildings;
+	&areas;
+	&contours;
+	&borders-lowzoom;
+	&borders;
+	&barriers;
+	&railways-lowzoom;
+	&railways-embankment;
+	&railways;
+	&airports-casing;
+	&airports-fill;
+	&airports-poly;
+	&roads-casing-lowzoom;
+	&roads-fill-lowzoom;
+	&roads-casing;
+	&roads-fill;
+	&trams;
+	&railway-points;
+	&symbols-road;
+	&housenumbers-poly;
+	&housenumbers-point;
+	&ferry-routes;
+	&railway-bridges-casing;
+	&railway-bridges;
+	&road-names-text;
+	&bridges-casing;
+	&bridges-fill;
+	&bridges-middle;
+	&aerialways;
+	&powerlines;
+	&powertowers;
+	&text-cities-lowzoom;
+	&text-cities;
+	&text-towns;
+	&text-villages;
+    &symbols-sport;
+	&symbols-stations;
+	&text-natural-areas-lowzoom;
+	&text-natural-areas-highzoom;
+    &text-water-lowzoom;
+	&text-glacier-lowzoom;
+    &text-natural-poly;
+    &symbols-peaks;
+    &text-peaks;
+    &symbols-saddle;
+    &symbols-1;
+	&symbols-2;
+	&symbols-poly;
+	&symbols-point;
+	&symbols-viewpoint;
+	&text-roads-ref;
+	&text-waterways;
+	&test;
+	
+
+	<!-- layers -->
+	
+	&basemap-relief;
+	
+	<Layer name="landuse-lowzoom">
+		<StyleName>landuse-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,landuse,"natural" FROM landuse) AS landuse </Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="landuse">
+		<StyleName>landuse</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,way_area,landuse,leisure,"natural",wetland,leaf_type,amenity,crop,orchard FROM planet_osm_polygon WHERE (landuse IS NOT NULL) OR (leisure IS NOT NULL) OR ("natural" IS NOT NULL) OR (wetland IS NOT NULL) OR (leaf_type IS NOT NULL) OR (amenity IS NOT NULL) OR (crop IS NOT NULL) OR (orchard IS NOT NULL) ORDER BY (CASE WHEN landuse='forest' THEN 0 ELSE 1 END) asc) AS landuse </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	&hillshade;
+	
+	<Layer name="landuse-over-hillshade">
+		<StyleName>landuse-over-hillshade</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,landuse,"natural",leaf_type,amenity,building,power FROM planet_osm_polygon WHERE (landuse IS NOT NULL) OR ("natural" IS NOT NULL) OR (leaf_type IS NOT NULL) OR (amenity IS NOT NULL) OR (building IS NOT NULL) OR (power IS NOT NULL)) AS landuse </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	&basemap-sea;
+	
+	<Layer name="road-areas">
+		<StyleName>road-areas</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,highway FROM planet_osm_polygon WHERE highway IS NOT NULL) AS roadareas</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="water-lowzoom">
+		<StyleName>water-casing-lowzoom</StyleName>
+		<StyleName>water-fill-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural",water,waterway,way_area,name FROM water) AS water </Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="waterway-lines">
+		<StyleName>waterway-lines</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"CEMT",intermittent,motorboat,tunnel,waterway FROM planet_osm_line WHERE ("CEMT" IS NOT NULL) OR (intermittent IS NOT NULL) OR (motorboat IS NOT NULL) OR (tunnel IS NOT NULL) OR (waterway IS NOT NULL)) AS water </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="water-polygons">
+		<StyleName>waterway-polygons-casing</StyleName>
+		<StyleName>waterway-polygons-fill</StyleName>
+		<StyleName>water-areas</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"CEMT",motorboat,"natural",landuse,leisure,waterway,intermittent,way_area FROM planet_osm_polygon WHERE (("CEMT" IS NOT NULL) OR (motorboat IS NOT NULL) OR ("natural" IS NOT NULL) OR (landuse IS NOT NULL) OR (leisure IS NOT NULL) OR (waterway IS NOT NULL) OR (intermittent IS NOT NULL))) AS water </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="landuse-over-water">
+		<StyleName>landuse-over-water</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural",wetland FROM planet_osm_polygon WHERE ("natural" IS NOT NULL) OR (wetland IS NOT NULL)) AS landuse </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="water-weir-arrows">
+		<StyleName>water-weir</StyleName>
+		<StyleName>waterway-arrows</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,waterway,intermittent FROM planet_osm_line WHERE (waterway IS NOT NULL) OR (intermittent IS NOT NULL)) AS water </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="tunnels">
+		<StyleName>tunnels-casing</StyleName>
+		<StyleName>tunnels-fill</StyleName>
+		<StyleName>tunnels-middle</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,service,tracktype,oneway,attraction,sport,leisure,surface FROM planet_osm_line WHERE (tunnel = 'yes') AND (highway IS NOT NULL OR attraction='summer_toboggan' OR leisure='track')) AS roads </Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="cliffs-lines">
+		<StyleName>cliffs</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural","man_made",highway,barrier,'no' as area FROM planet_osm_line WHERE ("natural" IS NOT NULL) OR ("man_made" IS NOT NULL) OR (highway IS NOT NULL) OR (barrier IS NOT NULL)) AS cliff </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	<Layer name="cliffs-polygons">
+		<StyleName>cliffs</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural","man_made",highway,barrier,'yes' as area FROM planet_osm_polygon WHERE ("natural" IS NOT NULL) OR ("man_made" IS NOT NULL) OR (highway IS NOT NULL) OR (barrier IS NOT NULL)) AS cliff </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="buildings">
+		<StyleName>buildings</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,building,leisure,railway,amenity,aeroway FROM planet_osm_polygon WHERE (building IS NOT NULL AND building != 'no') OR (aeroway = 'terminal')) AS buildings </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="areas">
+		<StyleName>areas</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,landuse,leisure,way_area FROM planet_osm_polygon WHERE (landuse IS NOT NULL) OR (leisure IS NOT NULL)) AS area </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="contours">
+		<StyleName>contours</StyleName>
+		<Datasource>
+            <Parameter name="table">(SELECT way,ele FROM planet_osm_line) AS contours </Parameter>
+			<Parameter name="dbname">contours</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="borders-lowzoom">
+		<StyleName>borders-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,boundary,admin_level FROM borders) AS borders</Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="borders">
+		<StyleName>borders</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,boundary,admin_level,name FROM planet_osm_line WHERE boundary IN ('administrative')) AS borders </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="barriers-poly">
+		<StyleName>barriers</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,barrier,historic,fenced,ST_Perimeter(way) AS length FROM planet_osm_polygon WHERE (barrier IS NOT NULL) OR (historic IS NOT NULL) OR (fenced IS NOT NULL)) AS barriers </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	<Layer name="barriers-line">
+		<StyleName>barriers</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,barrier,historic,fenced,ST_Length(way) AS length FROM planet_osm_line WHERE (barrier IS NOT NULL) OR (historic IS NOT NULL) OR (fenced IS NOT NULL)) AS barriers </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="railways-lowzoom">
+		<StyleName>railways-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,railway,"service",tunnel FROM railways) AS railways</Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="railways">
+		<StyleName>railways-embankment</StyleName>
+		<StyleName>railways</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,railway,tunnel,embankment,service FROM planet_osm_line WHERE railway IS NOT NULL) AS railways </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="airports-line">
+		<StyleName>airports-casing</StyleName>
+		<StyleName>airports-fill</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,aeroway FROM planet_osm_line WHERE aeroway IS NOT NULL) AS airports_line</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="airports-poly">
+		<StyleName>airports-poly</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,aeroway,way_area FROM planet_osm_polygon WHERE aeroway IS NOT NULL) AS airports_poly</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="roads-lowzoom">
+		<StyleName>roads-casing-lowzoom</StyleName>
+		<StyleName>roads-fill-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,highway FROM roads) AS roads </Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="roads">
+		<StyleName>roads-casing</StyleName>
+		<StyleName>roads-fill</StyleName>
+		<StyleName>trams</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,construction,name,sac_scale,trail_visibility,via_ferrata_scale,service,surface,tracktype,lanes,embankment,oneway,railway,leisure,sport,attraction FROM planet_osm_line WHERE (!scale_denominator! &gt; 300000) OR ((bridge IS NULL OR bridge = 'no') AND (tunnel IS NULL OR tunnel != 'yes')) AND (highway IS NOT NULL OR railway='tram' OR leisure='track' OR attraction='summer_toboggan') ORDER BY (CASE WHEN highway IN ('motorway','trunk') THEN 5 WHEN highway='primary' THEN 1 WHEN highway='secondary' THEN 2 WHEN highway='tertiary' THEN 3 ELSE 4 END) DESC ) AS roads</Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="railway-points" clear-label-cache="on">
+		<StyleName>railway-points</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,railway,station,subway FROM planet_osm_point WHERE (railway IS NOT NULL) OR (station IS NOT NULL) OR (subway IS NOT NULL)) AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="ferry-routes">
+		<StyleName>ferry-routes</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,route FROM planet_osm_line WHERE route IS NOT NULL) AS route </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="railway-bridges">
+		<StyleName>railway-bridges-casing</StyleName>
+		<StyleName>railway-bridges</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,railway,service,layer FROM planet_osm_line WHERE (bridge != 'no') AND (railway IS NOT NULL) AND (layer IS NULL OR layer &lt;= '1')) AS railways </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="railway-bridges-layer2" group-by="layer">
+		<StyleName>railway-bridges-casing</StyleName>
+		<StyleName>railway-bridges</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,railway,service,layer FROM planet_osm_line WHERE (bridge != 'no') AND (railway IS NOT NULL) AND (layer &gt; '1')) AS railways </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="bridges">
+		<StyleName>bridges-casing</StyleName>
+		<StyleName>bridges-fill</StyleName>
+		<StyleName>bridges-middle</StyleName>
+		<StyleName>trams</StyleName>
+		<StyleName>road-names-text</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,service,surface,tracktype,layer,name,railway,oneway,leisure,sport,attraction FROM planet_osm_line WHERE (bridge != 'no') AND (highway IS NOT NULL OR railway = 'tram' OR leisure='track' OR attraction='summer_toboggan') AND (layer IS NULL OR layer &lt;= '1')) AS roads </Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="bridges-layer2">
+		<StyleName>bridges-casing</StyleName>
+		<StyleName>bridges-fill</StyleName>
+		<StyleName>bridges-middle</StyleName>
+		<StyleName>trams</StyleName>
+		<StyleName>road-names-text</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,service,surface,tracktype,layer,name,railway,oneway,leisure,sport,attraction FROM planet_osm_line WHERE (bridge != 'no') AND (highway IS NOT NULL OR railway = 'tram' OR leisure='track' OR attraction='summer_toboggan') AND (layer = '2')) AS roads </Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="bridges-layer3" group-by="layer">
+		<StyleName>bridges-casing</StyleName>
+		<StyleName>bridges-fill</StyleName>
+		<StyleName>bridges-middle</StyleName>
+		<StyleName>trams</StyleName>
+		<StyleName>road-names-text</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,service,surface,tracktype,layer,name,railway,oneway,leisure,sport,attraction FROM planet_osm_line WHERE (bridge != 'no') AND (highway IS NOT NULL OR railway = 'tram' OR leisure='track' OR attraction='summer_toboggan') AND (layer &gt; '2')) AS roads </Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="cablecars">
+		<StyleName>aerialways</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,aerialway FROM planet_osm_line WHERE aerialway IS NOT NULL) AS aerialway </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="powerlines">
+		<StyleName>powerlines</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,power,voltage FROM planet_osm_line WHERE (power IS NOT NULL) OR (voltage IS NOT NULL)) AS powerlines </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	<Layer name="powertowers">
+		<StyleName>powertowers</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,power FROM planet_osm_point WHERE power IN ('tower','pole')) AS powertowers </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="text-natural-areas-lowzoom">
+	 <StyleName>text-natural-areas-lowzoom</StyleName>
+	 <Datasource>
+	   <Parameter name="table">(SELECT way,name,areatype,way_area,nextregionsize,subregionsize FROM naturalarealabels) AS naturallabels </Parameter>
+	   <Parameter name="dbname">lowzoom</Parameter>
+	   &postgis-settings;
+	 </Datasource>
+	</Layer>
+
+	
+      <Layer name="text-water-lowzoom">
+		<StyleName>text-water-lowzoom</StyleName>
+		<Datasource>
+            <Parameter name="table">(SELECT way,' '&#124;&#124;name&#124;&#124;' ' AS name,lake_area FROM lakelabels WHERE label='lakeaxis' OR label='bayaxis' OR label='straitaxis') AS lakelabels </Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="text-natural-poly">
+		<StyleName>text-natural-poly</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,name,"natural",leisure,way_area FROM planet_osm_polygon WHERE (name IS NOT NULL) OR ("natural" IS NOT NULL) OR (leisure IS NOT NULL)) AS names</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="symbols-sport">
+		<StyleName>symbols-sport</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,(pitchdata).icon AS icon,(pitchdata).angle AS angle,(pitchdata).pitch_area AS pitch_area,(pitchdata).labelsizefactor AS labelsizefactor FROM (select way,getpitchicon(way,sport) as pitchdata FROM planet_osm_polygon WHERE leisure='pitch' AND (building IS NULL OR building = 'no')) AS pitches) AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+    <Layer name="symbols-stations">
+		<StyleName>symbols-stations</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,name,railway,train,subway,station,direction FROM planet_osm_point WHERE (railway='station' OR railway='halt') AND ((direction IS NULL) OR direction SIMILAR TO '[0-9]+')) AS names</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="symbols-peaks">
+		<StyleName>symbols-peaks</StyleName>
+        <StyleName>text-peaks</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural",name,ele,"summit:cross",otm_isolation::INTEGER FROM planet_osm_point WHERE ("natural" = 'peak' or "natural" = 'volcano') ORDER BY otm_isolation::INTEGER DESC) AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="symbols-poly">
+		<StyleName>symbols-1</StyleName>
+		<StyleName>symbols-2</StyleName>
+		<StyleName>symbols-poly</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,access,amenity,highway,historic,"memorial:type",castle_type,religion,denomination,denotation,"man_made","tower:type","communication:radio","communication:television",'('&#124;&#124;substring(height from '^[\d]+')&#124;&#124;')' as height,building,"natural",name,ruins,NULL AS "summit:cross",tourism,"power","generator:source","site_type",leisure,sport,leaf_type,disused,abandoned,railway,way_area FROM planet_osm_polygon) AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="symbols-point">
+		<StyleName>symbols-1</StyleName>
+		<StyleName>symbols-2</StyleName>
+		<StyleName>symbols-point</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,access,amenity,highway,historic,"memorial:type",castle_type,leaf_type,religion,denomination,denotation,"man_made","tower:type","communication:radio","communication:television",'('&#124;&#124;substring(height from '^[\d]+')&#124;&#124;')' as height,building,"natural",name,ruins,"summit:cross",tourism,"power","generator:source","site_type",sport,disused,abandoned,railway,train,subway,otm_isolation::INTEGER FROM planet_osm_point) AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="symbols-saddle">
+		<StyleName>symbols-saddle</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"natural",direction,name,ele FROM planet_osm_point where ("natural"='saddle' or "natural"='col' or "natural"='notch') AND direction SIMILAR TO '[0-9]+') AS symbols </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+    <Layer name="text-glacier-lowzoom">
+		<StyleName>text-glacier-lowzoom</StyleName>
+		<Datasource>
+            <Parameter name="table">(SELECT way,name,lake_area FROM lakelabels WHERE label='glacieraxis') AS lakelabels </Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="text-natural-areas-highzoom">
+	 <StyleName>text-natural-areas-highzoom</StyleName>
+	 <Datasource>
+	   <Parameter name="table">(SELECT way,name,areatype,way_area,nextregionsize,subregionsize FROM naturalarealabels) AS naturallabels </Parameter>
+	   <Parameter name="dbname">lowzoom</Parameter>
+	   &postgis-settings;
+	 </Datasource>
+	</Layer>
+
+	<Layer name="symbols-viewpoint">
+		<StyleName>symbols-viewpoint</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,tourism,(int_dir).s1 as firstrotation,(int_dir).a1 as firstangle,(int_dir).s2 as secondrotation,(int_dir).a2 as secondangle FROM (SELECT way,tourism,viewpointdirection(direction) AS int_dir FROM planet_osm_point WHERE (tourism='viewpoint' AND direction IS NOT NULL)) AS viewpoints) AS symbols</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="road-names-text">
+		<StyleName>road-names-text</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,ST_Length(way) AS length,highway,name,service,surface,tracktype,lanes,embankment,oneway FROM planet_osm_line WHERE (!scale_denominator! &gt; 300000) OR ((bridge IS NULL OR bridge = 'no') AND (tunnel IS NULL OR tunnel != 'yes')) AND (highway IS NOT NULL OR (leisure='track' AND sport='bobsleigh') OR attraction='summer_toboggan') ORDER BY (CASE WHEN highway IN ('motorway','trunk') THEN 5 WHEN highway='primary' THEN 1 WHEN highway='secondary' THEN 2 WHEN highway='tertiary' THEN 3 ELSE 4 END) DESC ) AS roads</Parameter> 
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="building-housenumbers-polygons">
+		<StyleName>housenumbers-poly</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"addr:housenumber",name,building,way_area FROM planet_osm_polygon WHERE building IS NOT NULL) AS housenumbers </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	<Layer name="building-housenumbers-points">
+		<StyleName>housenumbers-point</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,"addr:housenumber",name,building FROM planet_osm_point WHERE "addr:housenumber" IS NOT NULL) AS housenumbers </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="text-roads-ref">
+		<StyleName>text-roads-ref</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,highway,ref FROM planet_osm_line WHERE (ST_Length(way)::integer &gt; 1000) AND ref IS NOT NULL) AS roads </Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="text-waterways">
+		<StyleName>text-waterways</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,name,waterway FROM planet_osm_line WHERE waterway IS NOT NULL) AS names</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+	<Layer name="text-cities-lowzoom">
+		<StyleName>text-cities-lowzoom</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,admin_level,name,capital,place,population FROM cities ORDER BY population DESC) AS cities</Parameter>
+			<Parameter name="dbname">lowzoom</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+
+	<Layer name="text-cities" clear-label-cache="on">
+		<StyleName>text-cities</StyleName>
+		<StyleName>text-towns</StyleName>
+		<StyleName>text-villages</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT way,admin_level,name,capital,'('&#124;&#124;substring(ele from '^[\d]+')&#124;&#124;')' as ele,place,population::INTEGER FROM planet_osm_point WHERE (population IS NULL OR population SIMILAR TO '[[:digit:]]+') AND place IN ('city','town','village','suburb','hamlet','isolated_dwelling','locality') ORDER BY (CASE WHEN place='city' THEN 0 WHEN place='town' THEN 1 WHEN place='village' THEN 2 ELSE 3 END) ASC, (CASE WHEN population IS NUll THEN 0 WHEN population similar to '[[:digit:]]+' THEN population::integer ELSE 0 END) DESC
+		  ) AS names</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>
+	
+<!--	<Layer name="test">
+		<StyleName>test</StyleName>
+		<Datasource>
+			<Parameter name="table">(SELECT l.way,l.name,l.waterway FROM planet_osm_line l JOIN planet_osm_polygon p ON ST_Intersects(p.way,l.way) WHERE p.waterway='riverbank' AND l.name='Wiesent' AND l.waterway='river') AS test</Parameter>
+			<Parameter name="dbname">gis</Parameter>
+			&postgis-settings;
+		</Datasource>
+	</Layer>-->
+	
+	
+</Map>
+
+<!--
+macros:
+	!scale_denominator!
+	!bbox!
+-->

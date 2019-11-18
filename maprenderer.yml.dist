@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  maprenderer:
+    image: maprenderer:latest
+    container_name: maprenderer
+    volumes:
+      - ./data:/mnt
+      - ./data/db:/var/lib/postgresql
+    ports:
+      - '80:80'
+      - '443:443'

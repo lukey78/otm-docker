@@ -1,0 +1,10 @@
+<Style name="symbols-point">
+	
+	<!-- see railway-points for subway icons -->
+	<Rule>
+		&maxscale_zoom16;
+		&minscale_zoom17;
+		<Filter>[railway] = 'station' and [subway] = 'yes'</Filter>
+		<TextSymbolizer fontset-name="sans-oblique" size="9" fill="#5427ff" halo-radius="2" halo-fill="rgba(255,255,255,0.9)" placement="point" dy="7" wrap-width="100" wrap-before="true">[name]</TextSymbolizer>
+	</Rule>
+</Style>

@@ -1,0 +1,94 @@
+<Style name="landuse-over-hillshade">
+
+	<Rule>
+		&maxscale_zoom12;
+		&minscale_zoom17;
+		<Filter>[natural] = 'bare_rock'</Filter>
+		<PolygonPatternSymbolizer file="symbols-otm/bare_rock.png" opacity="0.3"/>
+	</Rule>
+	<Rule>
+		&maxscale_zoom10;
+		&minscale_zoom17;
+		<Filter>([natural] = 'scree')</Filter>
+		<PolygonPatternSymbolizer file="symbols-otm/scree.png"/>
+	</Rule>
+
+	<!-- again forest quite transparent over hillshade to optimize result -->
+	<Rule>
+		&maxscale_zoom11;
+		&minscale_zoom11;
+		<Filter>([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest')</Filter>
+		<PolygonSymbolizer fill="#ffffd9" comp-op="soft-light" fill-opacity="0.5" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom12;
+		&minscale_zoom17;
+		<Filter>(([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest') and ([leaf_type] = 'needleleaved'))</Filter>
+		<PolygonPatternSymbolizer file="symbols-otm/forest-coniferous_2.png" opacity="0.1"/>
+		<PolygonSymbolizer fill="#ffffd9" comp-op="soft-light" fill-opacity="0.5" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom12;
+		&minscale_zoom17;
+		<Filter>(([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest') and ([leaf_type] = 'broadleaved'))</Filter>
+		<PolygonPatternSymbolizer file="symbols-otm/forest-deciduous_2.png" opacity="0.1"/>
+		<PolygonSymbolizer fill="#ffffd9" comp-op="soft-light" fill-opacity="0.5" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom12;
+		&minscale_zoom17;
+		<Filter>(([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest') and (not ([leaf_type] = 'needleleaved' or [leaf_type] = 'broadleaved')))</Filter>
+		<PolygonPatternSymbolizer file="symbols-otm/forest_2.png" opacity="0.1"/>
+		<PolygonSymbolizer fill="#ffffd9" comp-op="soft-light" fill-opacity="0.5" />
+	</Rule>
+	
+	<!-- forest outlines again -->
+    <Rule>
+		&maxscale_zoom11;
+		&minscale_zoom11;
+		<Filter>([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest')</Filter>
+        <LineSymbolizer stroke="#61983c" stroke-width="0.3" stroke-opacity="0.4" />
+	</Rule>
+    <Rule>
+		&maxscale_zoom12;
+		&minscale_zoom13;
+		<Filter>([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest')</Filter>
+        <LineSymbolizer stroke="#61983c" stroke-width="0.6" stroke-opacity="0.4" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom14;
+		&minscale_zoom17;
+		<Filter>([natural] = 'wood' or [landuse] = 'wood' or [landuse] = 'forest')</Filter>
+		<LinePatternSymbolizer opacity="0.5" file="symbols-otm/forest-outline.png"/>
+	</Rule>
+	
+
+	<!-- glaciers -->
+	<Rule>
+		&maxscale_zoom9;
+		&minscale_zoom17;
+		<Filter>([natural] = 'glacier')</Filter>
+		<PolygonSymbolizer fill="#d0f8ff" fill-opacity="0.5"/>
+	</Rule>
+	
+
+	<!-- residential fills -->
+	<Rule>
+		&maxscale_zoom10;
+		&minscale_zoom13;
+		<Filter>[landuse] = 'residential' or [landuse] = 'industrial' or [amenity] = 'university' or [amenity] = 'school' or [amenity] = 'hospital' or [landuse] = 'farmyard' or (([power]='plant' or [power]='substation') and ([building]=null or [building]!='no'))</Filter>
+		<PolygonSymbolizer fill="#aaaaaa" fill-opacity="0.3" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom14;
+		&minscale_zoom14;
+		<Filter>[landuse] = 'residential' or [landuse] = 'industrial' or [amenity] = 'university' or [amenity] = 'school' or [amenity] = 'hospital' or [landuse] = 'farmyard' or (([power]='plant' or [power]='substation') and ([building]=null or [building]!='no'))</Filter>
+		<PolygonSymbolizer fill="#aaaaaa" fill-opacity="0.15" />
+	</Rule>
+	<Rule>
+		&maxscale_zoom15;
+		&minscale_zoom17;
+		<Filter>[landuse] = 'residential' or [landuse] = 'industrial' or [amenity] = 'university' or [amenity] = 'school' or [amenity] = 'hospital' or [landuse] = 'farmyard' or (([power]='plant' or [power]='substation') and ([building]=null or [building]!='no'))</Filter>
+		<PolygonSymbolizer fill="#aaaaaa" fill-opacity="0.1" />
+	</Rule>
+</Style>
