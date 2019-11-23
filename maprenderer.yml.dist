@@ -4,6 +4,10 @@ services:
   maprenderer:
     image: maprenderer:latest
     container_name: maprenderer
+    environment:
+      - EMAIL=admin@this.srv
+      - DOMAIN=maprenderer
+      - WHITELIST=127.0.0.1
     volumes:
       - ./data:/mnt
       - ./data/db:/var/lib/postgresql
