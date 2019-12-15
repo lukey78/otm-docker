@@ -9,9 +9,12 @@ fi
 
 mkdir -p /mnt/db/tiles
 mkdir -p /mnt/db/flat-nodes
-chown postgres /mnt/tiles/database
+chown postgres /mnt/db/*
 sudo -u postgres psql -d gis -c "CREATE TABLESPACE hdd LOCATION '/mnt/db/tiles';" && \
 
 sudo -u postgres osm2pgsql -U postgres --slim -d gis -C 12000 --tablespace-slim-data hdd --tablespace-slim-index hdd \
           --number-processes 10 --flat-nodes /mnt/db/flat-nodes/gis-flat-nodes.bin  \
           --style /home/otm/db/opentopomap.style /mnt/data/switzerland-exact.osm.pbf
+
+echo "Re-Setting permissions for tirex"
+psql -d gis -c 'GRANT SELECT ON ALL TABLES IN SCHEMA public TO tirex;'

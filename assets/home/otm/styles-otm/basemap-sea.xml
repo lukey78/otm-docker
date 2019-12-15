@@ -1,15 +1,38 @@
-<Style name="waterpolys">
-	<Rule>
-		&maxscale_zoom0;
-		&minscale_zoom17;
-		<PolygonSymbolizer fill="#97d2e3" />
-	</Rule>
+<Style name="waterpolys_z8">
+<Rule>
+	&maxscale_zoom0;
+	&minscale_zoom8;
+	<PolygonSymbolizer fill="#97d2e3" />
+</Rule>
+</Style>
+<Style name="waterpolys_z9">
+<Rule>
+	&maxscale_zoom9;
+	&minscale_zoom10;
+	<PolygonSymbolizer fill="#97d2e3" />
+</Rule>
+</Style>
+<Style name="waterpolys_z11">
+<Rule>
+	&maxscale_zoom11;
+	&minscale_zoom17;
+	<PolygonSymbolizer fill="#a3dde8" />
+</Rule>
 </Style>
 
+<Layer name="waterpolys_z8">
+<StyleName>waterpolys_z8</StyleName>
+<Datasource>
+	<Parameter name="type">shape</Parameter>
+	<Parameter name="file">/mnt/data/water-polygons/simplified-water-polygons-split-3857/simplified_water_polygons</Parameter>
+</Datasource>
+</Layer>
+
 <Layer name="waterpolys">
-	<StyleName>waterpolys</StyleName>
-	<Datasource>
-		<Parameter name="type">shape</Parameter>
-		<Parameter name="file">/mnt/data/water-polygons/simplified-water-polygons-split-3857/simplified_water_polygons</Parameter>
-	</Datasource>
+<StyleName>waterpolys_z9</StyleName>
+<StyleName>waterpolys_z11</StyleName>
+<Datasource>
+	<Parameter name="type">shape</Parameter>
+	<Parameter name="file">/mnt/data/water-polygons/water-polygons-split-3857/water_polygons</Parameter>
+</Datasource>
 </Layer>

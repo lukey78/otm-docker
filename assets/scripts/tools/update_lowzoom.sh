@@ -88,3 +88,5 @@ psql -d lowzoom -c "INSERT INTO naturalarealabels SELECT * FROM dblink('dbname=g
 psql -d lowzoom -c "INSERT INTO naturalarealabels SELECT * FROM dblink('dbname=gis','SELECT * FROM lowzoom_natural_lines') AS t(way geometry(LineString,3857), name text, areatype text, way_area real,nextregionsize real,subregionsize real);"
 psql -d lowzoom -c "CREATE INDEX naturalarealabels_way_idx ON naturalarealabels USING GIST (way);"
 
+echo "Re-Setting permissions for tirex"
+psql -d lowzoom -c 'GRANT SELECT ON ALL TABLES IN SCHEMA public TO tirex;'
