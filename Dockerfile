@@ -80,6 +80,9 @@ RUN wget http://katze.tfiu.de/projects/phyghtmap/phyghtmap_2.21-1_all.deb && \
 # set python3 to be the default
 RUN echo "alias python=python3" >>~/.bashrc
 
+# install nik4.py & google drive downloader
+RUN apt-get install python3-pip && pip3 install nik4 && pip3 install gdown
+
 # copy assets
 COPY assets /
 
