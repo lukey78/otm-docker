@@ -17,6 +17,12 @@ if [ ! -d "/var/lib/postgresql/10/main" ]; then
   psql -d gis -c 'GRANT CONNECT ON DATABASE gis TO tirex;'
 fi
 
+if [ ! -d "/mnt/tiles" ]; then
+  mkdir -p /mnt/tiles/opentopomap
+  mkdir -p /mnt/tiles/example
+  chmod -R 777 /mnt/tiles
+fi
+
 /etc/init.d/postgresql start
 /etc/init.d/rsyslog start
 /etc/init.d/tirex-backend-manager start
