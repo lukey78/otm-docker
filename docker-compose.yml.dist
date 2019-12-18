@@ -1,16 +1,17 @@
 version: '3.4'
 
 services:
-  maprenderer:
-    image: maprenderer:latest
-    container_name: maprenderer
+  otm-server:
+    image: jhassler/otm-docker:latest
+    container_name: otm-server
     environment:
       - EMAIL=admin@this.srv
-      - DOMAIN=maprenderer
+      - DOMAIN=otm-docker
       - WHITELIST=127.0.0.1
     volumes:
       - ./data:/mnt
       - ./data/db:/var/lib/postgresql
+      - ./data/letsencrypt:/etc/letsencrypt
     ports:
       - '80:80'
       - '443:443'
