@@ -66,13 +66,13 @@ on your server. If you want to host the OTM server on a different port, change t
 You need a **PBF** file of your favourite region. This can be the full 48 GB planet file (https://planet.openstreetmap.org) or
 some regional extract. You can find a good list of servers in: https://wiki.openstreetmap.org/wiki/Planet.osm
 
-Download your PBF file and put it into your project root directory with the name `osmdata.pbf`.
+Download your PBF file and put it into your project `data/data` directory with the name `osmdata.pbf`.
 The script expects the data to have this name.
 
 
 ### Step 3: Download elevation data
 
-Download some elevation data files and put the into the local directory `data/srtm`. Create the `srtm` directory.
+Download some elevation data files and put the into the local directory `data/data/srtm`. You have to create the `srtm` directory.
 
 Here are some locations for elevation data:
 
@@ -81,12 +81,35 @@ Here are some locations for elevation data:
 * http://www.imagico.de/map/demsearch.php
 * http://data.opendataportal.at/dataset/dtm-europe
 
-The files should be in HGT format compressed as ZIP files. The files will be extracted and converted in the script dem_01.sh (see below). 
+The files should be in HGT format compressed as **ZIP** files. The files will be extracted and converted in the script 04_dem_hillshade.sh. 
 
 Make sure the SRTM data covers the region you chose in step 2.
 
+Easiest way: For worldwide SRTM data use:
 
-### Step 4: Start the container!
+```
+http://viewfinderpanoramas.org/dem3/M31.zip
+http://viewfinderpanoramas.org/dem3/M32.zip
+http://viewfinderpanoramas.org/dem3/M33.zip
+http://viewfinderpanoramas.org/dem3/L31.zip
+http://viewfinderpanoramas.org/dem3/L32.zip
+```
+
+
+### Step 4: Check your data & start the container!
+
+Your directory structure should look something like this:
+
+```
+docker-compose.yml
+data/data/osmdata.pbf
+data/data/srtm/some-zip-file1.zip
+data/data/srtm/some-zip-file2.zip
+data/db
+data/letsencrypt
+```
+
+Then start the thing:
 
 `docker-compose up -d`
 
@@ -114,6 +137,7 @@ Setup your OSM data and download some more required files:
 
 ```
 cd /scripts
+sh 00_setup_database.sh
 sh 01_download_water_polys.sh
 sh 02_import_osm_data.sh
 sh 03_preprocess_osm_data.sh
@@ -130,15 +154,17 @@ sh 05_dem_contours1.sh
 sh 06_dem_contours2.sh
 ```
 
-Please note: Step 2 (generating the contours data) can also take a long time.
+Please note: Step 2 (generating the contours data) can also take a long time and needs a lot of RAM, min. 16 GB for the world SRTM.
 
 
 ### Step 6: Almost done...
 
 Once everything has run through, you log out and restart your container:
 
-`docker-compose down`
-`docker-compose up -d`
+```
+docker-compose down
+docker-compose up -d
+```
 
 Then check if you can access your server and generate some tiles.
 

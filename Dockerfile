@@ -34,6 +34,7 @@ RUN apt-get update && \
     cmake libbz2-dev libgeos-dev libpq-dev libproj-dev lua5.3 liblua5.3-dev \
     rsyslog nano \
     gdal-bin \
+    screen \
     python-setuptools python3-matplotlib python-beautifulsoup python3-numpy python3-bs4 python3-gdal python-gdal
 
 # install locale so that postgres db is created with utf-8

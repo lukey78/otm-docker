@@ -1,5 +1,6 @@
 #!/bin/bash
 
+MEMORY=12000  # change this to the memory you have available
 DATA_FILE=/mnt/data/osmdata.pbf
 
 # Load data into database
@@ -13,7 +14,7 @@ mkdir -p /mnt/db/flat-nodes
 chown postgres /mnt/db/*
 sudo -u postgres psql -d gis -c "CREATE TABLESPACE hdd LOCATION '/mnt/db/tiles';" && \
 
-sudo -u postgres osm2pgsql -U postgres --slim -d gis -C 12000 --tablespace-slim-data hdd --tablespace-slim-index hdd \
+sudo -u postgres osm2pgsql -U postgres --slim -d gis -C $MEMORY --tablespace-slim-data hdd --tablespace-slim-index hdd \
           --number-processes 10 --flat-nodes /mnt/db/flat-nodes/gis-flat-nodes.bin  \
           --style /home/otm/db/opentopomap.style $DATA_FILE
 
