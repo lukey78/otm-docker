@@ -24,10 +24,11 @@ fi
 
 sed -i 's/$SERVER_NAME/'"$DOMAIN"'/g' /etc/apache2/sites-available/tileserver_site.conf
 sed -i 's/$WHITELIST/'"$WHITELIST"'/g' /etc/apache2/sites-available/tileserver_site.conf
+sed -i 's/$DOMAIN/'"$DOMAIN"'/g' /var/www/mapdemo/index.html
 
 if [ "$LETSENCRYPT" = "1" ]; then
   certbot -n --apache --cert-name mapserver --redirect --agree-tos --email "$EMAIL" --domain "$DOMAIN"
-fi;
+fi
 
 apachectl stop
 sleep 10

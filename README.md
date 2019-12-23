@@ -53,7 +53,7 @@ Then edit your `docker-compose.yml` and change the following variables:
 
 - LETSENCRYPT=0: Change this to 1 if you want to obtain SSL certificates through Let's Encrypt. Use this on a production server.
 - EMAIL=admin@this.srv: Change this to a valid E-Mail address. This will be used to setup the Let's Encrypt SSL certificates. You can leave it if you use the image only locally. 
-- DOMAIN=otm-docker: Change this to the domain (URL) of your OTM server. This will be used inside the Apache configuration.
+- DOMAIN=localhost: Change this to the domain (URL) of your OTM server. This will be used inside the Apache configuration.
 - WHITELIST=127.0.0.1: You can add an IP here that will not be affected by the mod_file throtteling.
 
 
@@ -162,8 +162,12 @@ docker-compose down
 docker-compose up -d
 ```
 
-Then check if you can access your server and generate some tiles.
 
+### Step 7: See your map!
+
+Now you should see your map by accessing your server's `mapdemo` directory, e.g.: http://localhost/mapdemo
+
+The tile layer is available with the following URL `http://your-server/otm/{z}/{x}/{y}.png`. You can include it in your favourite mapping applications.
 
 
 ## Build your own image

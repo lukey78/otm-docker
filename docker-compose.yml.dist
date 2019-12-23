@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  otm-server:
+  otm-docker:
     image: jhassler/otm-docker:latest
-    container_name: otm-server
+    container_name: otm-docker
     environment:
-      - LETSENCRYPT=1
+      - LETSENCRYPT=0
       - EMAIL=admin@this.srv
-      - DOMAIN=otm-docker.example.io
+      - DOMAIN=localhost
       - WHITELIST=127.0.0.1
     volumes:
       - ./data:/mnt
