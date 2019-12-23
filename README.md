@@ -172,4 +172,4 @@ The tile layer is available with the following URL `http://your-server/otm/{z}/{
 
 ## Build your own image
 
-`DOCKER_BUILDKIT=1 docker build -t otm-server:latest .`
+`DOCKER_BUILDKIT=1 docker build -t otm-docker:latest .`
