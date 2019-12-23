@@ -11,7 +11,7 @@ https://github.com/der-stefan/OpenTopoMap
 
 A multi processor server with at least 16 GB RAM and a lot of HD space.
 
-A full worldwide server needs about 3 TB of HD to host all tiles.
+A full worldwide server needs about 3 TB of HD to host all tiles up to zoom level 17.
 
 You need `docker` and `docker-compose` to run this image.
 
@@ -133,28 +133,23 @@ Once you've started some scripts, press `CTRL+a d` to detach from the screen ses
 with `exit`. If you come back later and login to your container again, you access the session with `screen -r`.
 
 
-Setup your OSM data and download some more required files:
+Execute the following scripts in the given order:
 
 ```
 cd /scripts
 sh 00_setup_database.sh
 sh 01_download_water_polys.sh
 sh 02_import_osm_data.sh
-sh 03_preprocess_osm_data.sh
-```
-
-Please note: Importing the OSM data depends on the size of your PBF file and your server's strength. It may take a long time.
-
-Then generate the elevation data (hillshade & contours). 
-
-```
-cd /scripts
-sh 04_dem_hillshade.sh
+sh 03_dem_hillshade.sh
+sh 04_preprocess_osm_data.sh
 sh 05_dem_contours1.sh
 sh 06_dem_contours2.sh
 ```
 
-Please note: Step 2 (generating the contours data) can also take a long time and needs a lot of RAM, min. 16 GB for the world SRTM.
+Step 2 (import OSM data) takes the most time, depending on the size of your PBF file. A full planet can even take DAYS to import.
+
+Step 5 (generating the contours data) can also take a long time and needs a lot of RAM, min. 16 GB for the world SRTM. If you get a 
+memory fault when executing, then try it with lower resolution or on a box with more RAM.
 
 
 ### Step 6: Almost done...
@@ -172,4 +167,4 @@ Then check if you can access your server and generate some tiles.
 
 ## Build your own image
 
-`DOCKER_BUILDKIT=1 docker build -t maprenderer:latest .`
+`DOCKER_BUILDKIT=1 docker build -t otm-server:latest .`
