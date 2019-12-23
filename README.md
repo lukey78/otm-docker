@@ -51,6 +51,7 @@ mkdir -p data/letsencrypt
 
 Then edit your `docker-compose.yml` and change the following variables:
 
+- LETSENCRYPT=0: Change this to 1 if you want to obtain SSL certificates through Let's Encrypt. Use this on a production server.
 - EMAIL=admin@this.srv: Change this to a valid E-Mail address. This will be used to setup the Let's Encrypt SSL certificates. You can leave it if you use the image only locally. 
 - DOMAIN=otm-docker: Change this to the domain (URL) of your OTM server. This will be used inside the Apache configuration.
 - WHITELIST=127.0.0.1: You can add an IP here that will not be affected by the mod_file throtteling.

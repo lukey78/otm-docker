@@ -5,8 +5,9 @@ services:
     image: jhassler/otm-docker:latest
     container_name: otm-server
     environment:
+      - LETSENCRYPT=1
       - EMAIL=admin@this.srv
-      - DOMAIN=otm-docker
+      - DOMAIN=otm-docker.example.io
       - WHITELIST=127.0.0.1
     volumes:
       - ./data:/mnt

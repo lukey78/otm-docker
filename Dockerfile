@@ -91,7 +91,12 @@ COPY assets /
 RUN a2dismod mpm_event && a2enmod mpm_prefork headers tile proxy proxy_http proxy_balancer ssl rewrite
 
 ENV LC_ALL=en_US.UTF-8
+ENV LETSENCRYPT=0
+ENV EMAIL=admin@localserver.net
+ENV DOMAIN=otm-docker.example.io
+ENV WHITELIST=127.0.0.1
 
 # start anything
 EXPOSE 80
+EXPOSE 443
 ENTRYPOINT ["/usr/local/bin/startup.sh"]

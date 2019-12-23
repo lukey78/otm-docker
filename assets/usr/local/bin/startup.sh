@@ -25,8 +25,9 @@ fi
 sed -i 's/$SERVER_NAME/'"$DOMAIN"'/g' /etc/apache2/sites-available/tileserver_site.conf
 sed -i 's/$WHITELIST/'"$WHITELIST"'/g' /etc/apache2/sites-available/tileserver_site.conf
 
-# start the letsencrypt bot to obtain certificate
-#certbot -n --apache --cert-name mapserver --redirect --agree-tos --email $EMAIL --domain $DOMAIN
+if [ "$LETSENCRYPT" = "1" ]; then
+  certbot -n --apache --cert-name mapserver --redirect --agree-tos --email "$EMAIL" --domain "$DOMAIN"
+fi;
 
 apachectl stop
 sleep 10
