@@ -174,6 +174,14 @@ Now you should see your map by accessing your server's `mapdemo` directory, e.g.
 The tile layer is available with the following URL `http://your-server/otm/{z}/{x}/{y}.png`. You can include it in your favourite mapping applications.
 
 
+### Optional stuff
+
+Rendering your tiles on demand usually takes too much time. It's better to pre-render them in the background. You can do that with Tirex.
+To render e.g. all tiles in Switzerland for zoom levels 1-16, this command can be used:
+
+`tirex-batch -p 5 -d map=opentopomap bbox=6.0,45.78,10.44,47.83 z=1-16`
+
+
 ## Build your own image
 
 `DOCKER_BUILDKIT=1 docker build -t otm-docker:latest .`
