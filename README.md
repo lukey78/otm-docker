@@ -124,7 +124,7 @@ They won't really come up, but the container should be running.
 
 This is only needed once. You have to start some scripts to import your data.
 
-`docker exec -ti otm-server bash`
+`docker exec -ti otm-docker bash`
 
 Inside start a `screen` session. Then you can start the long running scripts and don't stop them when you log out.
 
@@ -132,6 +132,10 @@ Inside start a `screen` session. Then you can start the long running scripts and
 
 Once you've started some scripts, press `CTRL+a d` to detach from the screen session. Then logout of your container
 with `exit`. If you come back later and login to your container again, you access the session with `screen -r`.
+
+Make some adjustments to the scripts depending on your available memory:
+
+* /scripts/import_osm_data.sh: Change `MEMORY=12000` to the MBs of memory you have available inside the Docker session
 
 
 Execute the following scripts in the given order:
