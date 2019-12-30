@@ -1,0 +1,14 @@
+# source: https://data.opendataportal.at/dataset/dtm-switzerland 1"
+gdown https://drive.google.com/uc?id=1sPg0-U9ZK4iN-QfzneNiJ6U6vm8N8itI
+gdown https://drive.google.com/uc?id=1aJ3g2Fl9eDYewK027Gd8bG0I6zXKjiTl
+gdown https://drive.google.com/uc?id=1SPD75k4mWOY77SDTkXzGmxvyTnHjfXWF
+gdown https://drive.google.com/uc?id=1AuEFGeNA0xF3rhSSvMSRfTC784HB7Hmp
+gdown https://drive.google.com/uc?id=12B3ojtlpODjLls4KK4HGDIS636lH5Qi0
+gdown https://drive.google.com/uc?id=1gTSJ9yH4hvN1veAJwMKfentqWKYr9cA1
+gdown https://drive.google.com/uc?id=16IvNGzXMjWNwpCtMufjxTH5hl4nJl6Id
+gdown https://drive.google.com/uc?id=1uqXJi9YynmLcvG8SbiJV6RPAv55Ab3EX
+gdown https://drive.google.com/uc?id=1zO3lb_DtjiJB_er9BzRc3y4F4Ejq3Srr
+gdown https://drive.google.com/uc?id=1naBMk_srnFkXq1u8jQGYQlFCIdQqS4-w
+gdown https://drive.google.com/uc?id=1sYcxuzRgZYVbujTKkxSS3cFN12wCbY9j
+gdown https://drive.google.com/uc?id=1SR2cz3aTvEesKawAbmbm6XxOhVFF7MNq
+gdown https://drive.google.com/uc?id=1ATXCdGK2Ws4tfyIMMj_0_EwQkHZQbfBR
