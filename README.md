@@ -182,6 +182,12 @@ To render e.g. all tiles in Switzerland for zoom levels 1-16, this command can b
 `tirex-batch -p 5 -d map=opentopomap bbox=6.0,45.78,10.44,47.83 z=1-16`
 
 
+mod_tile considers a tile as "old" if it's older than 3 days and triggers a re-render.
+If you want to prevent all re-renders and manually re-render the tiles by controlling Tirex, you can start the container with the following env var:
+
+`MOD_TILE_PREVENT_EXPIRATION=1`
+ 
+
 ## Build your own image
 
 `DOCKER_BUILDKIT=1 docker build -t otm-docker:latest .`

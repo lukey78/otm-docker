@@ -98,6 +98,7 @@ ENV LETSENCRYPT=0
 ENV EMAIL=admin@localserver.net
 ENV DOMAIN=otm-docker.example.io
 ENV WHITELIST=127.0.0.1
+ENV MOD_TILE_PREVENT_EXPIRATION=0
 
 # start anything
 EXPOSE 80

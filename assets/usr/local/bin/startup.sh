@@ -30,6 +30,10 @@ if [ "$LETSENCRYPT" = "1" ]; then
   certbot -n --apache --cert-name mapserver --redirect --agree-tos --email "$EMAIL" --domain "$DOMAIN"
 fi
 
+if [ "$MOD_TILE_PREVENT_EXPIRATION" = "1" ]; then
+  touch -d '10 years ago' /var/lib/mod_tile/planet-import-complete
+fi
+
 apachectl stop
 sleep 10
 apachectl -DFOREGROUND

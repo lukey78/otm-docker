@@ -9,6 +9,7 @@ services:
       - EMAIL=admin@this.srv
       - DOMAIN=localhost
       - WHITELIST=127.0.0.1
+      - MOD_TILE_PREVENT_EXPIRATION=1
     volumes:
       - ./data:/mnt
       - ./data/db:/var/lib/postgresql
